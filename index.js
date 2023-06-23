@@ -196,27 +196,34 @@ app.post("/register",function(req,res){
 });
 
 
-app.post("/login",function(req,res){
-
- //todo -----------------------------using passport-------------------------
-const user=new User({
-
+app.post("/login", function(req, res, next) {
+  const user = new User({
     username: req.body.username,
     password: req.body.password
+  });
 
-});
-//*to authenticate the user details with the server(IMPORTED from pass)
+  passport.authenticate("local", function(err, user, info) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
 
- //todo-------------------------------------------------------------------
-    req.login(user, function(err) {
-        if (err) {
-            console.log(err);    
-        }else{
-            passport.authenticate("local")(req,res,function(){
-                res.redirect("/secrets");
-            });
-        }
+    if (!user) {
+      // User authentication failed, redirect to login page
+      return res.redirect("/login");
+    }
+
+    req.logIn(user, function(err) {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+
+      // User authentication successful, redirect to secrets page
+      return res.redirect("/secrets");
     });
+  })(req, res, next);
+
  //todo ----------------------using bcypt and mongoose---------------------    
     // const username=req.body.username;
     // const password=req.body.password;
