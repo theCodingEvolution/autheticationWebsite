@@ -84,7 +84,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy ({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://erin-fierce-worm.cyclic.app/auth/google/secrets"
+    callbackURL: "https://expensive-smock-dog.cyclic.app/auth/google/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
 
