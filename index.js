@@ -256,7 +256,11 @@ app.post("/submit",function(req,res){
                 foundUser.save()
                         .then(() => {
                             res.redirect("/secrets");
+                        })
+                         .catch(err => {
+                            console.log(err);
                         });
+                        
             }
         })
         .catch(err => {
