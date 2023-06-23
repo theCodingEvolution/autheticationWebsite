@@ -28,6 +28,7 @@ const options = {
 //! -------------------------------app creation-----------------------
 
 const app=express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -48,7 +49,7 @@ app.use(passport.session());
 //! --------------------------------MONGOOOSE portion for Backend storage-----------------------------
 
 //* (mongoose connection)
-mongoose.connect("mongodb://127.0.0.1:27017/userDB",{useNewUrlParser: true});
+mongoose.connect(process.env.MONGO_URI,{useNewUrlParser: true});
 
 //* mongoose schema details
 const userSchema=new mongoose.Schema({
@@ -88,7 +89,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy ({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://localhost:3000/auth/google/secrets"
+    callbackURL: "https://erin-fierce-worm.cyclic.app/auth/google/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
 
@@ -265,6 +266,6 @@ app.post("/submit",function(req,res){
 
 //!------------------------------------------------------------------------------
 const server = https.createServer(options, app);
-app.listen(3000,function(){
+server.listen(PORT,function(){
     console.log("Run the server on the HTTPS port (3000)" );
 });; // Run the server on the HTTPS port (3000)
