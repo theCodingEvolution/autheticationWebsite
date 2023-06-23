@@ -259,12 +259,14 @@ app.post("/submit",function(req,res){
                         })
                          .catch(err => {
                             console.log(err);
+                            res.redirect("/secrets");
                         });
                         
             }
         })
         .catch(err => {
             console.log(err);
+            res.redirect("/secrets");
         });
 
 });
