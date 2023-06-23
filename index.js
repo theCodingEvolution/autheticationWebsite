@@ -154,7 +154,7 @@ app.post("/register",function(req,res){
 
    //todo ---------------------------------using passport---------------------
     //*this is included in passport-local-mongoose
-    User.register({username:"req.body.username"}, "req.body.password", function(err, user) {
+    User.register({username: req.body.username}, req.body.password, function(err, user) {
             if (err) {
                 console.log(err);
                 res.redirect('/register');
