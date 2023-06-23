@@ -11,12 +11,7 @@ const passport= require('passport');
 const passportLocalMongoose =  require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-const https = require('https');
-const fs = require('fs');
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
+
 
 
 // const bcrypt=require('bcrypt');
@@ -265,7 +260,7 @@ app.post("/submit",function(req,res){
 
 
 //!------------------------------------------------------------------------------
-const server = https.createServer(options, app);
-server.listen(PORT,function(){
+
+app.listen(PORT,function(){
     console.log("Run the server on the HTTPS port (3000)" );
 });; // Run the server on the HTTPS port (3000)
