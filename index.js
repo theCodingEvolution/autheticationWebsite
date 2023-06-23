@@ -135,7 +135,7 @@ app.get("/secrets",function(req,res){
 });
 
 app.get("/submit",function(req,res){
-    if(1) {
+    if(req.isAuthenticated()) {
         res.render("submit");
     }else{
         res.redirect("/login");
